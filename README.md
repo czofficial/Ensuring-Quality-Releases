@@ -2,7 +2,11 @@
 
 * [Overview](#overview)
 * [Terraform](#terraform)
-* [AzureDevOps](#azure-devops)
+* [Azure DevOps](#azure-devops)
+* [Postman](#postman)
+* [JMeter](#jmeter)
+* [Selenium](#selenium)
+* [Azure Monitor](#azure-monitor)
 
 ## Overview
 This project is part of the Udacity Cloud DevOps using Microsoft Azure Nanodegree Program.
@@ -32,16 +36,12 @@ In terms of a process flow, one can think of:
 8. UI Testing (Selenium)
 9. Observing (Azure Monitor & Azure Log Analytics)
 
-The automated tests (Integration, Stress and UI) run on a self-hosted virtual machine (Linux).
+The automated tests (Integration, UI and Stress) run on a self-hosted virtual machine (Linux).
 
 <br/>
 
 ## Terraform
-### Installation and Configuration
-- Configuration of storage account and state backend (see main.tf)
-    - storage_account_name
-    - container_name
-    - access_key
+### Configuration of storage account and state backend
 
 <br/>
 
@@ -86,11 +86,7 @@ Source: [Link](https://docs.microsoft.com/en-us/azure/developer/terraform/store-
 
 <br/>
 
-- Creating a Service Principal for Terraform (see terraform.tfvars)
-    - subscription_id
-    - client_id
-    - client_secret
-    - tenant_id
+### Creating a Service Principal for Terraform
 
 Create Service Principal:
 ```
@@ -143,14 +139,7 @@ Checking on Azure portal if resource group and its services have been successful
 <br/>
 
 ## Azure DevOps
-### Installation and Configuration
-- Import the two files azure-pipelines.yaml and StarterAPIs.json into Azure DevOps
-- Create a new Azure Pipeline from the azure-pipelines.yaml file.
-
-### Project Steps
-- Create the tasks that allow for Terraform to run and create the above resources.
-- Execute Test Suites for:
-    - Postman - runs during build stage
-    - Selenium - runs on the linux VM in the deployment stage
-    - JMeter - runs against the AppService in the deployment stage
-
+## Postman
+## JMeter
+## Selenium
+## Azure Monitor
