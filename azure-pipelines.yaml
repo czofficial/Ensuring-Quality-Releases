@@ -19,14 +19,6 @@ stages:
       inputs:
         secureFile: 'azurecreds.conf'
 
-    - task: Bash@3
-      displayName: "Copy SSH key"
-      inputs:
-        targetType: 'inline'
-        script: |
-          mkdir -p ~/.ssh
-          cp $(sshkey.secureFilePath) ~/.ssh
-
     - task: InstallSSHKey@0
       displayName: Install SSH key
       inputs:
