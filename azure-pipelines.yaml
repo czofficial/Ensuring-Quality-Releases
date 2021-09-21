@@ -1,67 +1,67 @@
-name: Azure Pipelines
 variables:
-  python.version: '3.7.6'
+ - group: azurecreds
+
+trigger:
+- main
+
 stages:
-- stage: Build
+- stage: Provision
   jobs:
-  - job: Build
+  - job: TerraformTasks
+    displayName: Terraform Tasks
     pool:
-      name: Hosted Ubuntu 1604
+      vmImage: 'ubuntu-18.04'
+
     steps:
-    # Needed for Terraform VM deployment
-    # - task: InstallSSHKey@0
-    #   inputs:
-    #     knownHostsEntry: 'KNOWN_HOSTS_STRING'
-    #     sshPublicKey: 'PUBLIC_KEY'
-    #     sshKeySecureFile: 'id_rsa'
-    - task: ArchiveFiles@2
-      displayName: 'Archive FakeRestAPI'
+    - task: DownloadSecureFile@1
+      displayName: Download azurecreds.conf file
+      name: azurecreds
       inputs:
-        rootFolderOrFile: 'path/to/fakerestapi'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip'
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
-      displayName: 'Upload Package'
-      artifact: drop-fakerestapi
-- stage:
-  jobs:
-  - deployment: FakeRestAPI
-    pool:
-      vmImage: 'Ubuntu-16.04'
-    environment: 'TEST'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
-            inputs:
-              azureSubscription: ''
-              appName: ''
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-  # - deployment: VMDeploy
-  #   displayName: NAME
-  #   environment:
-  #     name:  ENVIRONMENT NAME
-  #     resourceType: VirtualMachine
-  #     tags: TAG NAME
-  #   strategy:
-  #     runOnce:
-  #       deploy:
-  #         steps:
-  #         - task: Bash@3
-  #           inputs:
-  #             targetType: 'inline'
-  #             script: |
-  #               #! /bin/bash
-                
-  #               sudo apt-get upgrade -y
-  #               sudo apt-get install python3-pip -y
-  #               sudo apt-get install unzip -y
-  #               sudo apt-get install -y chromium-browser
-  #               pip3 install selenium
-  #               export PATH=$PATH:some/path
+        secureFile: 'azurecreds.conf'
 
+    - task: InstallSSHKey@0
+      displayName: Install SSH key
+      inputs:
+        knownHostsEntry: 'known_hosts'
+        sshPublicKey: $(public_key)
+        sshKeySecureFile: 'id_rsa'
 
+    - task: TerraformInstaller@0
+      displayName: Terraform Install
+      inputs:
+        terraformVersion: '1.0.1'
+
+    - task: TerraformTaskV2@2
+      displayName: Terraform Init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        commandOptions: '-backend-config=$(azurecreds.secureFilePath)'
+        backendServiceArm: 'azurerm-sc'
+        backendAzureRmResourceGroupName: 'tstate'
+        backendAzureRmStorageAccountName: 'tstate26325'
+        backendAzureRmContainerName: 'tstate'
+        backendAzureRmKey: 'test.terraform.tfstate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+
+    - task: AzureCLI@1
+      displayName: Set Environment Variables for Terraform
+      inputs:
+        azureSubscription: azurerm-sc
+        scriptLocation: inlineScript
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        addSpnToEnvironment: true
+        inlineScript: |
+            export ARM_CLIENT_ID=$(client_id)
+            export ARM_CLIENT_SECRET=$(client_secret)
+            export ARM_SUBSCRIPTION_ID=$(subscription_id)
+            export ARM_TENANT_ID=$(tenant_id)
+    
+    - task: TerraformTaskV2@2
+      displayName: Terraform Apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        commandOptions: '-auto-approve'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceNameAzureRM: 'azurerm-sc'

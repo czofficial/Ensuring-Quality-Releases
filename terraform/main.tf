@@ -28,7 +28,6 @@ module "network" {
   resource_group       = "${module.resource_group.resource_group_name}"
   address_prefix_test  = "${var.address_prefix_test}"
 }
-
 module "nsg-test" {
   source           = "../../modules/networksecuritygroup"
   location         = "${var.location}"
@@ -51,4 +50,13 @@ module "publicip" {
   application_type = "${var.application_type}"
   resource_type    = "publicip"
   resource_group   = "${module.resource_group.resource_group_name}"
+}
+module "vm" {
+  source               = "../../modules/vm"
+  location             = "${var.location}"
+  resource_group       = module.resource_group.resource_group_name
+  subnet_id            = module.network.subnet_id_test
+  public_ip_address_id = module.publicip.public_ip_address_id 
+  admin_username       = var.admin_username
+  prefix               = var.prefix
 }

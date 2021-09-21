@@ -50,37 +50,13 @@ Login to Azure CLI:
 az login
 ```
 
-Specify subscription to use:
+Configure remote state storage account:
+Execute the bash script:
 ```
-az account set --subscription="939d1c66-7864-4f15-8560-5c793c4110c8"
-```
-
-Configure remote state storage account:\
-Create resource group:
-```
-az group create --name tfstate-rg --location westeurope
-```
-Create storage account:
-```
-az storage account create --resource-group tfstate-rg  --name tfstatesa20210913 --sku Standard_LRS --encryption-services blob
-```
-Create blob container:
-```
-az storage container create --name tfstate-bc --account-name tfstatesa20210913
+sh azure-storage-account.sh
 ```
 
-Configure terraform backend state:
-```
-ACCOUNT_KEY=$(az storage account keys list --resource-group tfstate-rg --account-name tfstatesa20210913 --query '[0].value' -o tsv)
-```
-
-```
-ACCOUNT_KEY
-```
-
-Output can be found in the main.tf file.
-
-Note: 'key' is the name of the state store file to be created -> terraform.tfstate
+Storage account name, container name and access key will be used in the main.tf file. Key shall be defined as 'test.terraform.tfstate". "test" is pre-defined by Udacity throughout all terraform files.
 
 Source: [Link](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
 
@@ -90,10 +66,10 @@ Source: [Link](https://docs.microsoft.com/en-us/azure/developer/terraform/store-
 
 Create Service Principal:
 ```
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/939d1c66-7864-4f15-8560-5c793c4110c8" 
+az ad sp create-for-rbac --name="Ensuring-Quality-Releases" --role="Contributor" 
 ```
 
-Output can be found in the terraform.tfvars file.
+appid (client_id), password (client_secret) and tenant will be used in the terraform.tfvars file.
 
 Source: [Link](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
 
@@ -110,6 +86,7 @@ Terraform will be used for creating the following resources:
 
 The terraform resource code for AppService, Network, Network Security Group, Public IP and Resource Group is already provided by Udacity. The terraform resource code for the Linux VM is provided by me. This includes changes in the following terraform files: input.tf, main.tf, terraform.tfvars, vm/input.tf & vm/vm.tf.
 
+Locally, the following would apply:\
 Executing terraform:
 ```
 terraform init
@@ -133,12 +110,43 @@ terraform apply "solution.plan"
 Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 ``
 
-Checking on Azure portal if resource group and its services have been successfully created:
-![tf](./screenshots/tf_rg.png)
-
 <br/>
 
 ## Azure DevOps
+- Install the [Terraform extension for Azure DevOps](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks) if not already done. See "Organization settings" -> "Extensions".
+- Create a new Azure DevOps project
+- Create a new Service Connection
+1. Project settings
+2. Service connections
+3. Create service connection
+4. Azure Resource Manager
+5. Service Principal
+6. Service connection name: azurerm-sc
+- Upload Secure Files
+1. Pipelines
+2. Library
+3. Secure files
+4. Upload azurecreds.conf
+5. Upload SSH private key (no .pub ending)
+
+Create SSH public private key pair for authentification to the Linux VM:
+```
+# Looking for id_rsa public private key pair
+cd ~/.ssh/
+```
+
+```
+# If not there, this is how a public private key pair can be created:
+ssh-keygen -t rsa -b 4096 -f id_rsa
+```
+- Create Variable group
+1. From the azurecreds.conf file: subscription_id, client_id, subscription_id and tenant_id
+2. From the SSH public private key pair: public key (.pub ending)
+
+```
+# Get the value for the public ssh key
+cat id_rsa.pub
+```
 ## Postman
 ## JMeter
 ## Selenium
