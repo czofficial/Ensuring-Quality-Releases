@@ -156,6 +156,8 @@ cat id_rsa.pub
 
 - Go back to Library and add newly created pipeline to pipeline permissions by clicking on specific secure file
 
+With this pre-settings implemented, a new commit in the GitHub repository should automatically trigger a new pipeline run. In this case, terraform shall successfully provision a Virtual Machine in Azure.
+
 <br/>
 
 ## Postman
