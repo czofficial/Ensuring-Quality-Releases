@@ -147,6 +147,17 @@ ssh-keygen -t rsa -b 4096 -f id_rsa
 # Get the value for the public ssh key
 cat id_rsa.pub
 ```
+
+- Create pipeline
+1. GitHub YAML
+2. Select specific repo
+3. Select existing Azure Pipelines YAML file
+4. Save pipeline
+
+- Go back to Library and add newly created pipeline to pipeline permissions by clicking on specific secure file
+
+<br/>
+
 ## Postman
 ## JMeter
 ## Selenium
