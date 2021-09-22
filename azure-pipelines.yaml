@@ -30,7 +30,7 @@ stages:
       displayName: Copy & paste ida_rsa
       inputs:
         #SourceFolder: $(Agent.TempDirectory)
-        SourceFolder: '.ssh/'
+        SourceFolder: '/home/vsts/work/_temp/'
         Contents: 'id_rsa.pub'
         TargetFolder: '.ssh/authorized_keys'
 
