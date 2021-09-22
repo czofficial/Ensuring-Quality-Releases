@@ -31,7 +31,7 @@ stages:
     #  inputs:
     #    SourceFolder: $(Agent.TempDirectory)
     #    Contents: 'id_rsa.pub'
-    #    TargetFolder: '/home/cz.official/.ssh/authorized_keys'
+    #    TargetFolder: '.ssh/authorized_keys'
 
     - task: TerraformInstaller@0
       displayName: Terraform Install
