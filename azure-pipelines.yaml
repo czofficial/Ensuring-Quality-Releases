@@ -26,12 +26,12 @@ stages:
         sshPublicKey: $(public_key)
         sshKeySecureFile: 'id_rsa'
 
-    - task: CopyFiles@2
-      displayName: Copy & paste ida_rsa
-      inputs:
-        SourceFolder: $(Agent.TempDirectory)
-        Contents: 'id_rsa.pub'
-        TargetFolder: '.ssh/authorized_keys'
+    #- task: CopyFiles@2
+    #  displayName: Copy & paste ida_rsa
+    #  inputs:
+    #    SourceFolder: $(Agent.TempDirectory)
+    #    Contents: 'id_rsa.pub'
+    #    TargetFolder: '.ssh/authorized_keys'
 
     - task: TerraformInstaller@0
       displayName: Terraform Install
