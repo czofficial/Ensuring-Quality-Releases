@@ -10,7 +10,7 @@ stages:
   - job: TerraformTasks
     displayName: Terraform Tasks
     pool:
-      vmImage: 'ubuntu-16.04'
+      vmImage: 'ubuntu-21.04'
 
     steps:
     - task: DownloadSecureFile@1
