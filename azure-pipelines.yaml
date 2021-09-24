@@ -32,7 +32,7 @@ stages:
         #SourceFolder: $(Agent.TempDirectory)
         SourceFolder: '/home/vsts/work/_temp/'
         Contents: 'id_rsa.pub'
-        TargetFolder: '/home/adminuser/.ssh/authorized_keys/'
+        TargetFolder: '/.ssh/authorized_keys/'
 
     - task: TerraformInstaller@0
       displayName: Terraform Install

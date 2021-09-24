@@ -158,6 +158,13 @@ cat id_rsa.pub
 
 With this pre-settings implemented, a new commit in the GitHub repository should automatically trigger a new pipeline run. In this case, terraform shall successfully provision a Virtual Machine in Azure.
 
+Current error when provisioning terraform (terraform apply):
+![error1](./screenshots/error1.png)
+
+````
+│ Error: creating Linux Virtual Machine "udacity-vm" (Resource Group "udacityrg"): compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: Code="InvalidParameter" Message="Destination path for SSH public keys is currently limited to its default value /home/cz.official/.ssh/authorized_keys  due to a known issue in Linux provisioning agent." Target="linuxConfiguration.ssh.publicKeys.path"
+````
+
 <br/>
 
 ## Postman
