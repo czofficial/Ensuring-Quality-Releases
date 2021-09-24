@@ -165,6 +165,11 @@ Current error when provisioning terraform (terraform apply):
 │ Error: creating Linux Virtual Machine "udacity-vm" (Resource Group "udacityrg"): compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: Code="InvalidParameter" Message="Destination path for SSH public keys is currently limited to its default value /home/cz.official/.ssh/authorized_keys  due to a known issue in Linux provisioning agent." Target="linuxConfiguration.ssh.publicKeys.path"
 ````
 
+When doing exactly that what the error message says:
+![error2-1](./screenshots/error2-1.png)
+
+![error2-2](./screenshots/error2-2.png)
+
 <br/>
 
 ## Postman
