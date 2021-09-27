@@ -22,8 +22,9 @@ stages:
     - task: InstallSSHKey@0
       displayName: Install SSH key
       inputs:
-        knownHostsEntry: 'known_hosts'
-        sshPublicKey: $(public_key)
+        #knownHostsEntry: 'known_hosts'
+        knownHostsEntry: 'default'
+        sshPublicKey: '$(public_key)'
         sshKeySecureFile: 'id_rsa'
 
     - task: CopyFiles@2
