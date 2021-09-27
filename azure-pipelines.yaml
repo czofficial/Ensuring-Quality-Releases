@@ -38,7 +38,9 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls /home/adminuser/.ssh/authorized_keys/
+          ls /home/vsts/work/_temp/
+          ls /.ssh/authorized_keys/
+          ls /home/.ssh/authorized_keys/
 
     - task: TerraformInstaller@0
       displayName: Terraform Install
