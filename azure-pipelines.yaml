@@ -36,7 +36,13 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          mkdir -p home / {adminuser, .ssh, authorized:keys}
+          mkdir -p home / {adminuser, .ssh, authorized_keys}
+
+     - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          ls /home/adminuser/.ssh/authorized_keys/
 
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
