@@ -36,7 +36,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls /home/adminuser/
+          ls /home/cz.official/
 
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
