@@ -19,21 +19,32 @@ stages:
       inputs:
         secureFile: 'azurecreds.conf'
 
-    - task: InstallSSHKey@0
-      displayName: Install SSH key
-      inputs:
-        #knownHostsEntry: 'known_hosts'
-        knownHostsEntry: 'default'
-        sshPublicKey: '$(public_key)'
-        sshKeySecureFile: 'id_rsa'
+    #- task: InstallSSHKey@0
+    #  displayName: Install SSH key
+    #  inputs:
+    #    #knownHostsEntry: 'known_hosts'
+    #    knownHostsEntry: 'default'
+    #    sshPublicKey: '$(public_key)'
+    #    sshKeySecureFile: 'id_rsa'
 
-    - task: CopyFiles@2
-      displayName: Copy & paste ida_rsa
-      inputs:
-        #SourceFolder: $(Agent.TempDirectory)
-        SourceFolder: '/home/vsts/work/_temp/'
-        Contents: 'id_rsa.pub'
-        TargetFolder: '.ssh/authorized_keys/'
+    - task: InstallSSHKey@0
+        inputs:
+          knownHostsEntry: 'default'
+          sshKeySecureFile: 'id_rsa'
+    
+          - task: Bash@3
+       inputs:
+          targetType: 'inline'
+         script: |
+           ls /home/vsts/work/_temp/
+
+    #- task: CopyFiles@2
+    #  displayName: Copy & paste ida_rsa
+    #  inputs:
+    #    #SourceFolder: $(Agent.TempDirectory)
+    #    SourceFolder: '/home/vsts/work/_temp/'
+    #    Contents: 'id_rsa.pub'
+    #    TargetFolder: '.ssh/authorized_keys/'
 
     - task: TerraformInstaller@0
       displayName: Terraform Install
