@@ -26,23 +26,23 @@ stages:
         sshPublicKey: '$(public_key)'
         sshKeySecureFile: 'id_rsa'
 
-    #- task: CopyFiles@2
-    #  displayName: Copy & paste ida_rsa
-    #  inputs:
-    #    #SourceFolder: $(Agent.TempDirectory)
-    #    SourceFolder: '/home/vsts/work/_temp/'
-    #    Contents: 'id_rsa.pub'
-    #    TargetFolder: '.ssh/authorized_keys/'
-
-    - task: Bash@3
+    - task: CopyFiles@2
+      displayName: Copy & paste ida_rsa
       inputs:
-        targetType: 'inline'
-        script: |
-          mkdir ~/.ssh
-          chmod 700 ~/.ssh
-          touch ~/.ssh/authorized_keys
-          chmod 600 ~/.ssh/authorized_keys
-          cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+        #SourceFolder: $(Agent.TempDirectory)
+        SourceFolder: '/home/vsts/work/_temp/'
+        Contents: 'id_rsa.pub'
+        TargetFolder: 'home/vsts/.ssh/authorized_keys/'
+
+    #- task: Bash@3
+    #  inputs:
+    #    targetType: 'inline'
+    #    script: |
+    #      mkdir ~/.ssh
+    #      chmod 700 ~/.ssh
+    #      touch ~/.ssh/authorized_keys
+    #      chmod 600 ~/.ssh/authorized_keys
+    #      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
     - task: TerraformInstaller@0
       displayName: Terraform Install
