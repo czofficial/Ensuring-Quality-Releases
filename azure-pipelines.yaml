@@ -39,7 +39,7 @@ stages:
         targetType: 'inline'
         script: |
           cd /home
-          mkdir /adminuser/
+          sudo mkdir /adminuser/
 
     - task: Bash@3
       displayName: ls /home
