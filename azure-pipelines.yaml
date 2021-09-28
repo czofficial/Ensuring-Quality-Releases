@@ -36,7 +36,13 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls /home
+          cd /home
+          mkdir /adminuser
+          cd /adminuser
+          mkdir /.ssh
+          cd /.ssh
+          mkdir /authorized_keys
+
 
     - task: Bash@3
       inputs:
