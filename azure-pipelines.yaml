@@ -47,6 +47,13 @@ stages:
         script: |
           ls /home/vsts/
 
+    - task: Bash@3
+      displayName: ls
+      inputs:
+        targetType: 'inline'
+        script: |
+          ls ~/
+
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
       inputs:
