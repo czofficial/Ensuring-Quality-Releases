@@ -52,7 +52,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ls ~/
+          ls -a ~/
 
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
