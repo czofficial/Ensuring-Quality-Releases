@@ -37,10 +37,14 @@ stages:
         targetType: 'inline'
         script: |
           cd /home
+          chmod a+w home
           mkdir /adminuser
+          chmod a+w adminuser
           cd /adminuser
+          chmod a+w .ssh
           mkdir /.ssh
           cd /.ssh
+          chmod a+w authorized_keys
           mkdir /authorized_keys
 
 
