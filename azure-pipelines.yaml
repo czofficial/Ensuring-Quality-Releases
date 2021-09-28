@@ -34,19 +34,18 @@ stages:
           ls /home/vsts/work/_temp/
 
     - task: Bash@3
-      displayName: mkdir
+      displayName: mkdir /.ssh
       inputs:
         targetType: 'inline'
         script: |
-          cd /home/vsts/
-          sudo mkdir /.ssh/
+          sudo mkdir -p /home/vsts/.ssh/
 
     - task: Bash@3
       displayName: ls /home
       inputs:
         targetType: 'inline'
         script: |
-          ls /home/vsts/
+          ls /home/vsts/.ssh/authorized_keys/
 
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
@@ -54,7 +53,7 @@ stages:
         #SourceFolder: $(Agent.TempDirectory)
         SourceFolder: '/home/vsts/work/_temp/'
         Contents: 'id_rsa.pub'
-        TargetFolder: '.ssh/authorized_keys/'
+        TargetFolder: '/home/vsts/.ssh/authorized_keys/'
 
     #- task: Bash@3
     #  inputs:
