@@ -36,12 +36,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cd /home
-          sudo mkdir /adminuser
-          cd /adminuser
-          sudo mkdir /.ssh
-          cd /.ssh
-          sudo mkdir /authorized_keys
+          mkdir -p ~/home/adminuser
 
     - task: Bash@3
       inputs:
