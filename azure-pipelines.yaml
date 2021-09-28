@@ -27,19 +27,22 @@ stages:
         sshKeySecureFile: 'id_rsa'
     
     - task: Bash@3
+      displayName: ls /home/vsts/work/_temp/
       inputs:
         targetType: 'inline'
         script: |
           ls /home/vsts/work/_temp/
 
     - task: Bash@3
+      displayName: mkdir /adminuser
       inputs:
         targetType: 'inline'
         script: |
-          chown -R $USER:$USER /home
-          mkdir -p ~/home/adminuser
+          cd /home
+          mkdir /adminuser/
 
     - task: Bash@3
+      displayName: ls /home
       inputs:
         targetType: 'inline'
         script: |
