@@ -30,7 +30,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   network_interface_ids = [azurerm_network_interface.test.id]
   #disable_password_authentication = true
   admin_ssh_key {
-    username   = "adminuser"
+    username   = var.admin_username
     #public_key = file("~/.ssh/id_rsa.pub")
     #public_key = file("/home/vsts/work/_temp/id_rsa.pub")
     public_key = file("/home/adminuser/.ssh/authorized_keys/id_rsa.pub")

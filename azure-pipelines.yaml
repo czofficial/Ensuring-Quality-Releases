@@ -36,7 +36,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          mkdir -p home / {adminuser, .ssh, authorized_keys}
+          mkdir -p home/{adminuser,.ssh,authorized_keys}
 
     - task: Bash@3
       inputs:
