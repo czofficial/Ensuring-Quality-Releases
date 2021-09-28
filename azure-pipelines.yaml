@@ -43,12 +43,11 @@ stages:
           cd /.ssh
           sudo mkdir /authorized_keys
 
-
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: |
-          ls /home/adminuser/.ssh/authorized_keys/
+          ls /home/
 
     - task: CopyFiles@2
       displayName: Copy & paste ida_rsa
