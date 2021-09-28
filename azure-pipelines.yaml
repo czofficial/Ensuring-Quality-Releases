@@ -37,15 +37,11 @@ stages:
         targetType: 'inline'
         script: |
           cd /home
-          chmod a+w home
-          mkdir /adminuser
-          chmod a+w adminuser
+          sudo mkdir /adminuser
           cd /adminuser
-          chmod a+w .ssh
-          mkdir /.ssh
+          sudo mkdir /.ssh
           cd /.ssh
-          chmod a+w authorized_keys
-          mkdir /authorized_keys
+          sudo mkdir /authorized_keys
 
 
     - task: Bash@3
