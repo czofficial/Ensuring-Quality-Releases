@@ -36,6 +36,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
+          chown -R $USER:$USER /home
           mkdir -p ~/home/adminuser
 
     - task: Bash@3
