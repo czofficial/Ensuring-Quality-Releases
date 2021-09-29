@@ -163,12 +163,12 @@ Error received when provisioning terraform (terraform apply) in its latest ubunt
 │ Error: creating Linux Virtual Machine "udacity-vm" (Resource Group "udacityrg"): compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: Code="InvalidParameter" Message="Destination path for SSH public keys is currently limited to its default value /home/cz.official/.ssh/authorized_keys  due to a known issue in Linux provisioning agent." Target="linuxConfiguration.ssh.publicKeys.path"
 ````
 
-I could not figure out a 'good' solution or workaround for it except for going back to an old Ubuntu release. With release 16.04, the Linux provisioning agent still allows the public_key to be in the '/home/vsts/work/temp' folder. However, this solution is only time-limited due to this warning:
+I could not figure out a 'good' solution or workaround for it except for going back to an old Ubuntu release. With release 16.04 and 18.04, the Linux provisioning agent still allows the public_key to be in the '/home/vsts/work/temp' folder. However, the solution with releae 16.04 is only time-limited due to this warning:
 ```
 ##[warning]Ubuntu 16.04 LTS environment is deprecated and will be removed on October 18, 2021. Migrate to ubuntu-latest instead. For more details, see https://github.com/actions/virtual-environments/issues/3287.
 ```
 
-...
+![provisioning](./screenshots/provisioning.png)
 
 <br/>
 
