@@ -10,7 +10,7 @@ stages:
   - job: TerraformTasks
     displayName: Terraform Tasks
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'ubuntu-16.04'
 
     steps:
     - task: DownloadSecureFile@1
@@ -54,13 +54,13 @@ stages:
         script: |
           ls -la ~/.ssh/authorized_keys
 
-    - task: CopyFiles@2
-      displayName: Copy & paste ida_rsa
-      inputs:
-        #SourceFolder: $(Agent.TempDirectory)
-        SourceFolder: '/home/vsts/work/_temp/'
-        Contents: 'id_rsa.pub'
-        TargetFolder: '/home/vsts/.ssh/authorized_keys/'
+    #- task: CopyFiles@2
+    #  displayName: Copy & paste ida_rsa
+    #  inputs:
+    #    #SourceFolder: $(Agent.TempDirectory)
+    #    SourceFolder: '/home/vsts/work/_temp/'
+    #    Contents: 'id_rsa.pub'
+    #    TargetFolder: '/home/vsts/.ssh/authorized_keys/'
 
     #- task: Bash@3
     #  inputs:

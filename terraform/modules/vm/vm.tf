@@ -32,8 +32,8 @@ resource "azurerm_linux_virtual_machine" "test" {
   admin_ssh_key {
     username   = var.admin_username
     #public_key = file("~/.ssh/id_rsa.pub")
-    #public_key = file("/home/vsts/work/_temp/id_rsa.pub")
-    public_key = file("/home/vsts/.ssh/authorized_keys/id_rsa.pub")
+    public_key = file("/home/vsts/work/_temp/id_rsa.pub")
+    #public_key = file("/home/vsts/.ssh/authorized_keys/id_rsa.pub")
     #public_key = file("/home/vsts/.ssh/authorized_keys/id_rsa.pub")
     #public_key = file("~/.ssh/authorized_keys/id_rsa.pub")
     #public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3k+Ba14zxTiNdbcI0+zRYN2qbTUKROkO9EV/Cc4ONDJoNLQ7V/cvNtk+Rpl6b8hEdU57PCs4B2t6HBZPwqJx0s277A1mfYKWw6RkOoZapKH8kXkg60p7lTRhuIPMDv27tVsF/gAlRWbb2VkltQ4Fqq5IF0FNd7R7w7vk5dFMJ6ndf6z9lVaoKOvqT+vAXAFeexizlngIBTYtrLisnn55HZeW0skBQaA0QwE4Czoorgd2dtDhtuU21tlP7PBei0KA4EISGXK3rLd8HsdnwwnGhcatQDohQdLA7jWp/Lf9lEB/rand8bAPePBE/lPj+bL+3NdIswF4U5kk67U1HrDgh0gEToXdCMOO75EPqZUqdV1Y822SiJgXOfGRzLMeTILW4FHqm/el8eG4nNSXxra0gXyyNTTCfQnNA1yTZqOrnFZGIx6tURcuMnD5p9JrlQOK3U91en5zzEoJLDjpDMVQT2fN8VKApIIAExBfUb2Z4N31lixKnEZ4wqFYlVwLTGbcIq61yn6V+UannZHdX+PjJWPULDvr6SOrVlwPoe1DVHptvn/75NFtGToojxFkUREJI/jF3eXwO4ZultJ2nwC3w79/i4rLRPqzPXrGw16JD+ucriziAVSkRIKGLeRYLBrWeMCdpyaaYEWxYJyjYXju7uM11vVxLVEDDIFkzRnknLw=="
