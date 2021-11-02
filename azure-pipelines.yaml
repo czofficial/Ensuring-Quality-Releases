@@ -238,7 +238,7 @@ stages:
     - deployment: test_selenium
       displayName: "Deploy and run Selenium tests"
       environment:
-        name: "Test"
+        name: "TEST"
         resourceType: VirtualMachine
       strategy:
         runOnce:
