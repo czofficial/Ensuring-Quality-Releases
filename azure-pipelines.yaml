@@ -181,53 +181,52 @@ stages:
             displayName: Configure VM
 
 - stage: "Test"
-    jobs:
-      - job: test_postman
-        displayName: "Deploy and run Postman tests"
-        pool:
-          vmImage: "ubuntu-18.04"
-        steps:
-          - task: NodeTool@0
-            displayName: "Install Node.js"
-            inputs:
-              versionSpec: "14.x"
-              checkLatest: true
-
-          - task: Bash@3
-            displayName: "Install Newman"
-            inputs:
-              targetType: "inline"
-              script: |
-                #!/bin/bash
-                npm install -g newman
-                mkdir -p output/newman/
-          - task: Bash@3
-            displayName: "Run regression tests"
-            inputs:
-              targetType: "inline"
-              script: |
-                #!/bin/bash
-                newman run automatedtesting/postman/TestRestAPI_Regression.postman_collection.json \
-                  --environment automatedtesting/postman/TestEnv.postman_environment.json \
-                  --suppress-exit-code \
-                  --delay-request 5000 \
-                  --reporters cli,junit --reporter-junit-export output/newman/regression.xml
-          - task: Bash@3
-            displayName: "Run validation tests"
-            inputs:
-              targetType: "inline"
-              script: |
-                #!/bin/bash
-                newman run automatedtesting/postman/TestRestAPI_Validation.postman_collection.json \
+  jobs:
+    - job: test_postman
+       displayName: "Deploy and run Postman tests"
+       pool:
+        vmImage: "ubuntu-18.04"
+       steps:
+        - task: NodeTool@0
+          displayName: "Install Node.js"
+           inputs:
+             versionSpec: "14.x"
+            checkLatest: true
+         - task: Bash@3
+          displayName: "Install Newman"
+          inputs:
+             targetType: "inline"
+            script: |
+               #!/bin/bash
+               npm install -g newman
+              mkdir -p output/newman/
+        - task: Bash@3
+          displayName: "Run regression tests"
+           inputs:
+            targetType: "inline"
+             script: |
+               #!/bin/bash
+               newman run automatedtesting/postman/TestRestAPI_Regression.postman_collection.json \
                  --environment automatedtesting/postman/TestEnv.postman_environment.json \
-                  --suppress-exit-code \
-                  --delay-request 5000 \
-                  --reporters cli,junit --reporter-junit-export output/newman/validation.xml
-          - task: PublishTestResults@2
-            displayName: "Publish regression and validation test results"
-            inputs:
-              testResultsFormat: "JUnit"
-              testResultsFiles: "*.xml"
-              searchFolder: "$(System.DefaultWorkingDirectory)/output/newman/"
-              mergeTestResults: true
-              testRunTitle: "Regression and validation test results"
+                 --suppress-exit-code \
+                 --delay-request 5000 \
+                 --reporters cli,junit --reporter-junit-export output/newman/regression.xml
+        - task: Bash@3
+          displayName: "Run validation tests"
+          inputs:
+             targetType: "inline"
+             script: |
+              #!/bin/bash
+               newman run automatedtesting/postman/TestRestAPI_Validation.postman_collection.json \
+                --environment automatedtesting/postman/TestEnv.postman_environment.json \
+                --suppress-exit-code \
+                --delay-request 5000 \
+                --reporters cli,junit --reporter-junit-export output/newman/validation.xml
+         - task: PublishTestResults@2
+          displayName: "Publish regression and validation test results"
+          inputs:
+             testResultsFormat: "JUnit"
+             testResultsFiles: "*.xml"
+             searchFolder: "$(System.DefaultWorkingDirectory)/output/newman/"
+             mergeTestResults: true
+             testRunTitle: "Regression and validation test results"
