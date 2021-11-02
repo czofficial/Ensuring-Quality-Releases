@@ -201,6 +201,8 @@ Steps to set-up Azure Monitor:
 
 In my case, the alert gets triggered if the Memory Consumption of the App is above a threshold of 50 MB.
 
+![alert](./screenshots/alert.png)
+
 ## Postman
 ## JMeter
 ## Selenium
