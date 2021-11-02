@@ -20,11 +20,9 @@ def login (driver, user="standard_user", password="secret_sauce"):
 
 if __name__ == "__main__":
     print ('Starting the browser...')
-    # --uncomment when running in Azure DevOps.
     options = ChromeOptions()
     options.add_argument("--headless") 
     driver = webdriver.Chrome(options=options)
-    #driver = webdriver.Chrome()
 
     print (timestamp()+' Browser started successfully. Navigating to the demo page to login.')
 
@@ -32,4 +30,4 @@ if __name__ == "__main__":
     add_cart(driver, 6)
     remove_cart(driver, 6)
 
-    print(timestamp() + ' Selenium Tests DONE')
+    print(timestamp() + ' Selenium Test Completed')
