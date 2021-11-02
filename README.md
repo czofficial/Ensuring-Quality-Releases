@@ -58,7 +58,7 @@ sh azure-storage-account.sh
 
 Storage account name, container name and access key will be used in the main.tf file. Key shall be defined as 'test.terraform.tfstate". "test" is pre-defined by Udacity throughout all terraform files.
 
-Source: [Link](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
+Source: [Link to tutorial.](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=azure-cli)
 
 <br/>
 
@@ -71,7 +71,7 @@ az ad sp create-for-rbac --name="Ensuring-Quality-Releases" --role="Contributor"
 
 appid (client_id), password (client_secret) and tenant will be used in the terraform.tfvars file.
 
-Source: [Link](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
+Source: [Link to tutorial.](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret)
 
 <br/>
 
@@ -172,19 +172,35 @@ I could not figure out a 'good' solution or workaround for it except for going b
 
 ### Pipeline Environment
 
-In order to add the VM in the pipeline environment, the following steps have to be taken:
-1. Pipelines
-2. Environments
+In order to add the VM in the pipeline environment, the following steps need to be taken:
+1. Go to Pipelines
+2. Go to Environments
 3. Create "TEST" environment
 4. Add resource: VM -> OS: Linux
 5. SSH into the provided VM (see in Azure Portal how to)
 6. Copy and paste the registration script into the terminal of the VM and run it
 
+You then should see the VM linked to the TEST environment. From there you can go directly to the pipeline runs.
+
+Up this step, a successfull pipeline run should look as seen in the image below that includes the provisioning, the building and the deplyoment steps:
+![building_deploying](./screenshots/building_deploying.png)
+
+## Azure Monitor
 ### Log Analytics
+In order to add Log Analytics to the project, one needs to create/add a Log Analytics Workspace in one's resource group (e.g. udacityrg). One way of doing it is to use the Azure Portal or you can also run it in the terminal by using a bash file (setup-log-analytics.sh file). Source: [Link to tutorial.](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace-cli). You can see the successfull creation/run either in your pipeline ("Deploy" section) or by clicking on the Log Analytics workspace (e.g. udacityla), then go to Settings/Agents management, then to Linux servers. You should see then "1 Linx computers connected" displayed. One recommendation here: Put the workspace ID and primary key into your DevOps Library as already done with the azurecreds variables and refer to them in the yaml file.
 
+### Azure Monitor
+Steps to set-up Azure Monitor:
+1. Go to Azure Portal
+2. Go to Resource Group
+3. Go to App Service
+4. Go to Monitoring -> Alerts
+5. Create an Alert Rule
+6. Define a Condition
+7. Create an ActionGroup (e-Mail notification)
 
+In my case, the alert gets triggered if the Memory Consumption of the App is above a threshold of 50 MB.
 
 ## Postman
 ## JMeter
 ## Selenium
-## Azure Monitor

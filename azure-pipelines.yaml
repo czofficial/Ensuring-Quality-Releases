@@ -174,9 +174,60 @@ stages:
               sudo apt-get install -y chromium-chromedriver
               python3 -m pip install --upgrade pip
               pip3 install selenium
-              # Install Log Analytics agent on Linux computers (only need to run once, comment when installed)
               wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w ${AZURE_LOG_ANALYTICS_ID} -s ${AZURE_LOG_ANALYTICS_PRIMARY_KEY} -d opinsights.azure.com
             env: 
               AZURE_LOG_ANALYTICS_ID: $(la_workspace_id)
               AZURE_LOG_ANALYTICS_PRIMARY_KEY: $(la_primary_key)
             displayName: Configure VM
+
+  - stage: "Test"
+    jobs:
+      - job: test_postman
+        displayName: "Deploy and run Postman tests"
+        pool:
+          vmImage: "ubuntu-18.04"
+        steps:
+          - task: NodeTool@0
+            displayName: "Install Node.js"
+            inputs:
+              versionSpec: "14.x"
+              checkLatest: true
+
+          - task: Bash@3
+            displayName: "Install Newman"
+            inputs:
+              targetType: "inline"
+              script: |
+                #!/bin/bash
+                npm install -g newman
+                mkdir -p output/newman/
+          - task: Bash@3
+            displayName: "Run regression tests"
+            inputs:
+              targetType: "inline"
+              script: |
+                #!/bin/bash
+                newman run automatedtesting/postman/TestRestAPI_Regression.postman_collection.json \
+                  --environment automatedtesting/postman/TestEnv.postman_environment.json \
+                  --suppress-exit-code \
+                  --delay-request 5000 \
+                  --reporters cli,junit --reporter-junit-export output/newman/regression.xml
+          - task: Bash@3
+            displayName: "Run validation tests"
+            inputs:
+              targetType: "inline"
+              script: |
+                #!/bin/bash
+                newman run automatedtesting/postman/TestRestAPI_Validation.postman_collection.json \
+                 --environment automatedtesting/postman/TestEnv.postman_environment.json \
+                  --suppress-exit-code \
+                  --delay-request 5000 \
+                  --reporters cli,junit --reporter-junit-export output/newman/validation.xml
+          - task: PublishTestResults@2
+            displayName: "Publish regression and validation test results"
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "*.xml"
+              searchFolder: "$(System.DefaultWorkingDirectory)/output/newman/"
+              mergeTestResults: true
+              testRunTitle: "Regression and validation test results"
