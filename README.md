@@ -168,8 +168,6 @@ I could not figure out a 'good' solution or workaround for it except for going b
 ##[warning]Ubuntu 16.04 LTS environment is deprecated and will be removed on October 18, 2021. Migrate to ubuntu-latest instead. For more details, see https://github.com/actions/virtual-environments/issues/3287.
 ```
 
-![provisioning](./screenshots/provisioning.png)
-
 ### Pipeline Environment
 
 In order to add the VM in the pipeline environment, the following steps need to be taken:
@@ -181,9 +179,6 @@ In order to add the VM in the pipeline environment, the following steps need to 
 6. Copy and paste the registration script into the terminal of the VM and run it
 
 You then should see the VM linked to the TEST environment. From there you can go directly to the pipeline runs.
-
-Up this step, a successfull pipeline run should look as seen in the image below that includes the provisioning, the building and the deplyoment steps:
-![building_deploying](./screenshots/building_deploying.png)
 
 ## Azure Monitor
 ### Log Analytics
@@ -203,6 +198,9 @@ In my case, the alert gets triggered if the Memory Consumption of the App is abo
 
 ![alert](./screenshots/alert.png)
 
-## Postman
-## JMeter
-## Selenium
+## Tests
+
+
+### Postman
+### JMeter
+### Selenium
