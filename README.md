@@ -3,10 +3,8 @@
 * [Overview](#overview)
 * [Terraform](#terraform)
 * [Azure DevOps](#azure-devops)
-* [Postman](#postman)
-* [JMeter](#jmeter)
-* [Selenium](#selenium)
 * [Azure Monitor](#azure-monitor)
+* [Tests](#tests)
 
 ## Overview
 This project is part of the Udacity Cloud DevOps using Microsoft Azure Nanodegree Program.
@@ -186,6 +184,8 @@ You then should see the VM linked to the TEST environment. From there you can go
 Provision:
 ![provision](./screenshots/provision.png)
 
+<br/>
+
 ![azurerg](./screenshots/azurerg.png)
 
 Build:
@@ -194,11 +194,13 @@ Build:
 Deploy:
 ![deploy](./screenshots/deploy.png)
 
+<br/>
+
 ![fakerestapi](./screenshots/fakerestapi.png)
 
 ## Azure Monitor
 ### Log Analytics
-In order to add Log Analytics to the project, one needs to create/add a Log Analytics Workspace in one's resource group (e.g. udacityrg). One way of doing it is to use the Azure Portal or you can also run it in the terminal by using a bash file (setup-log-analytics.sh file). Source: [Link to tutorial.](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace-cli). You can see the successfull creation/run either in your pipeline ("Deploy" section) or by clicking on the Log Analytics workspace (e.g. udacityla), then go to Settings/Agents management, then to Linux servers. You should see then "1 Linx computers connected" displayed. One recommendation here: Put the workspace ID and primary key into your DevOps Library as already done with the azurecreds variables and refer to them in the yaml file.
+In order to add Log Analytics to the project, one needs to create/add a Log Analytics Workspace in one's resource group (e.g. udacityrg). One way of doing it is to use the Azure Portal or you can also run it in the terminal by using a bash file (setup-log-analytics.sh file). Source: [Link to tutorial.](https://docs.microsoft.com/en-us/azure/azure-monitor/logs/quick-create-workspace-cli) You can see the successfull creation/run either in your pipeline ("Deploy" section) or by clicking on the Log Analytics workspace (e.g. udacityla), then go to Settings/Agents management, then to Linux servers. You should see then "1 Linx computers connected" displayed. One recommendation here: Put the workspace ID and primary key into your DevOps Library as already done with the azurecreds variables and refer to them in the yaml file.
 
 ![la](./screenshots/la.png)
 
@@ -216,9 +218,13 @@ In my case, the alert gets triggered if the Memory Consumption of the App is abo
 
 ![alert-config](./screenshots/alert-config.png)
 
+<br/>
+
 ![alert](./screenshots/alert.png)
 
-![alert-metric](./screenshots/metric.png)
+<br/>
+
+![alert-metric](./screenshots/alert-metric.png)
 
 ## Tests
 Successfull run of the pipeline:
@@ -237,6 +243,8 @@ Test results:
 
 ### Postman
 ![postman](./screenshots/postman.png)
+
+<br/>
 
 ![postman-test](./screenshots/postman-test.png)
 
