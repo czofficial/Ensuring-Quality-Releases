@@ -55,3 +55,4 @@ if __name__ == "__main__":
     remove_cart(driver, 6)
 
     print(timestamp() + ' Selenium Tests DONE')
+    
