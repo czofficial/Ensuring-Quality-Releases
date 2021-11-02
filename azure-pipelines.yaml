@@ -180,7 +180,7 @@ stages:
               AZURE_LOG_ANALYTICS_PRIMARY_KEY: $(la_primary_key)
             displayName: Configure VM
 
-  - stage: "Test"
+- stage: "Test"
     jobs:
       - job: test_postman
         displayName: "Deploy and run Postman tests"
