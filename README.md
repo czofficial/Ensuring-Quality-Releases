@@ -172,8 +172,17 @@ I could not figure out a 'good' solution or workaround for it except for going b
 
 <br/>
 
-Pipeline Environment
+### Pipeline Environment
 
+In order to add the VM in the pipeline environment, the following steps have to be taken:
+1. Pipelines
+2. Environments
+3. Create "TEST" environment
+4. Add resource: VM -> OS: Linux
+5. SSH into the provided VM (see in Azure Portal how to)
+6. Copy and paste the registration script into the terminal of the VM and run it
+
+### Log Analytics
 
 
 
