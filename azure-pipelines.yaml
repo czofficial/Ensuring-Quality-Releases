@@ -182,10 +182,10 @@ stages:
 
 - stage: "Test"
   jobs:
-    - job: test_postman
-       displayName: "Deploy and run Postman tests"
-       pool:
-        vmImage: "ubuntu-18.04"
+  - job: test_postman
+    displayName: "Deploy and run Postman tests"
+    pool:
+      vmImage: "ubuntu-18.04"
        steps:
         - task: NodeTool@0
           displayName: "Install Node.js"
