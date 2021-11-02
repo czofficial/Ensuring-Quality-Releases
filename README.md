@@ -170,8 +170,6 @@ I could not figure out a 'good' solution or workaround for it except for going b
 
 ![provisioning](./screenshots/provisioning.png)
 
-<br/>
-
 ### Pipeline Environment
 
 In order to add the VM in the pipeline environment, the following steps have to be taken:
