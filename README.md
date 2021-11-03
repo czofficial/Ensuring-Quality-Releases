@@ -253,7 +253,7 @@ Successfull artifacts:
 ![artifacts](./screenshots/artifacts.png)
 
 Test results:
-![test-results](./screenshots/test-results.png)
+![test-result](./screenshots/test-result.png)
 
 ### Postman
 ![postman](./screenshots/postman.png)
