@@ -167,13 +167,26 @@ stages:
         deploy:
           steps:
           - bash: |
-              sudo apt-get update -y
-              sudo apt-get install python3-pip -y
-              sudo apt-get install unzip -y
-              sudo apt-get install -y chromium-browser
-              sudo apt-get install -y chromium-chromedriver
-              python3 -m pip install --upgrade pip
-              pip3 install selenium
+              export LC_ALL=C
+              sudo apt-get install -y software-properties-common
+              sudo apt-add-repository -y universe
+              sudo apt-add-repository -y ppa:deadsnakes/ppa
+              sudo apt-get -y update
+              sudo apt-get install -y python3.8 python3.8-distutils python3-pip unzip chromium-browser chromium-chromedriver
+              sudo rm /usr/bin/python3
+              sudo ln -s /usr/bin/python3.8 /usr/bin/python3
+              sudo apt remove -y python3-pip
+              curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+              sudo python3 get-pip.py
+              sudo pip3 install --upgrade pip
+              sudo pip3 install selenium
+              #sudo apt-get update -y
+              #sudo apt-get install python3-pip -y
+              #sudo apt-get install unzip -y
+              #sudo apt-get install -y chromium-browser
+              #sudo apt-get install -y chromium-chromedriver
+              #python3 -m pip install --upgrade pip
+              #pip3 install selenium
               wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w ${AZURE_LOG_ANALYTICS_ID} -s ${AZURE_LOG_ANALYTICS_PRIMARY_KEY} -d opinsights.azure.com
             env: 
               AZURE_LOG_ANALYTICS_ID: $(la_workspace_id)
