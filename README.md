@@ -208,6 +208,12 @@ In order to add Log Analytics to the project, one needs to create/add a Log Anal
 
 ![la](./screenshots/la.png)
 
+In order to track custom logs, go to:
+1. Log Analytics workspace
+2. Go to Settings/Custom logs
+3. Create a new custom log with the following settings: Upload a sample selenium log (e.g. selenium-test-129.log), then define the Timestamp as Record Delimeter, then define the collection path (e.g. Linux: /path/as/stated/in/yaml), then name it as you wish, finally create it.
+4. Go to General/Logs to view the custom logs.
+
 ### Azure Monitor
 Steps to set-up Azure Monitor:
 1. Go to Azure Portal
@@ -255,6 +261,10 @@ Test results:
 <br/>
 
 ![postman-test](./screenshots/postman-test.png)
+
+<br/>
+
+![postman-test2](./screenshots/postman-test2.png)
 
 ### Selenium
 ![selenium](./screenshots/selenium.png)
