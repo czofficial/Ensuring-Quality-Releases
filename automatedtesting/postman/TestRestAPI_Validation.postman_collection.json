@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5207a681-2fbc-4820-9d77-46172c478f7f",
-		"name": "DummyRestAPI_Validation",
+		"_postman_id": "ef2b4cd6-0c4c-48eb-b721-f7d39a105686",
+		"name": "Validation Test Udacity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,14 +12,23 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});",
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.not.include(\"null\");",
-							"});",
-							"var json = pm.response.json();",
-							"pm.environment.set(\"id\", json.data.id);"
+							"pm.test(\"Successful response\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"success\");\r",
+							"});\r",
+							"\r",
+							"var json = pm.response.json();\r",
+							"pm.environment.set(\"id\", json.data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.name).to.eql(pm.variables.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.age).to.eql(pm.variables.get(\"age\"));\r",
+							"    pm.expect(jsonData.data.salary).to.eql(pm.variables.get(\"salary\"));\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -30,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"salary\": \"{{salary}}\",\r\n    \"age\": \"{{age}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,13 +47,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{app}}/api/v1/create",
+					"raw": "{{url}}/api/{{version}}/create",
 					"host": [
-						"{{app}}"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"create"
 					]
 				}
@@ -58,51 +67,25 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful response\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"success\");",
-							"});",
-							"",
-							"pm.test(\"Nixon found\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Nixon\");",
-							"});",
-							"",
-							"pm.test(\"Clinton not found\", function () {",
-							"    pm.expect(pm.response.text()).to.not.include(\"Clinton\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{app}}/api/v1/employees",
-					"host": [
-						"{{app}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"employees"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Employee",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
 							"pm.test(\"Successful response\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"success\");\r",
 							"});\r",
-							"pm.test(\"Nixon found\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"Nixon\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\"  : { \"type\": \"string\" },\r",
+							"        \"data\"    : { \"type\": \"array\" }\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test('Validate schema', function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -113,15 +96,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{app}}/api/v1/employee/1",
+					"raw": "{{url}}/api/{{version}}/employees",
 					"host": [
-						"{{app}}"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
-						"employee",
-						"1"
+						"{{version}}",
+						"employees"
 					]
 				}
 			},
@@ -137,12 +119,31 @@
 							"pm.test(\"Successful response\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"success\");\r",
 							"});\r",
-							"pm.test(\"Salary 42000\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"42000\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
 							"});\r",
-							"pm.test(\"Salary not 23000\", function () {\r",
-							"    pm.expect(pm.response.text()).to.not.include(\"23000\");\r",
-							"});"
+							"\r",
+							"var schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\"  : { \"type\": \"string\" },\r",
+							"        \"data\"    : { \"type\": \"object\",\r",
+							"                      \"properties\": {\r",
+							"                          \"name\": { \"type\": \"string\" },\r",
+							"                          \"salary\": { \"type\": \"string\" },\r",
+							"                          \"age\": { \"type\": \"string\" }\r",
+							"                      }\r",
+							"                    },\r",
+							"\t\t\"message\" : { \"type\": \"string\" }\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test('Validate schema', function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -153,7 +154,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"salary\": \"42000\",\r\n    \"age\": \"{{age}}\"\r\n}",
+					"raw": "{\r\n    \"name\": \"{{new_name}}\",\r\n    \"salary\": \"{{new_salary}}\",\r\n    \"age\": \"{{new_age}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -161,13 +162,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{app}}/api/v1/update/{{id}}",
+					"raw": "{{url}}/api/{{version}}/update/{{id}}",
 					"host": [
-						"{{app}}"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"update",
 						"{{id}}"
 					]
@@ -186,8 +187,27 @@
 							"    pm.expect(pm.response.text()).to.include(\"success\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Deleted\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"deleted\");\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\"  : { \"type\": \"string\" },\r",
+							"        \"data\"    : { \"type\": \"string\" },\r",
+							"\t\t\"message\" : { \"type\": \"string\" }\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test('Validate schema', function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been deleted\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -198,13 +218,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{app}}/api/v1/delete/{{id}}",
+					"raw": "{{url}}/api/{{version}}/delete/{{id}}",
 					"host": [
-						"{{app}}"
+						"{{url}}"
 					],
 					"path": [
 						"api",
-						"v1",
+						"{{version}}",
 						"delete",
 						"{{id}}"
 					]

@@ -226,6 +226,10 @@ In my case, the alert gets triggered if the Memory Consumption of the App is abo
 
 ![alert-metric](./screenshots/alert-metric.png)
 
+<br/>
+
+![alert-overview](./screenshots/alert-overview.png)
+
 ## Tests
 Successfull run of the pipeline:
 1. Provision
@@ -251,5 +255,17 @@ Test results:
 ### Selenium
 ![selenium](./screenshots/selenium.png)
 
+<br/>
+
+![selenium2](./screenshots/selenium2.png)
+
 ### JMeter
 ![jmeter](./screenshots/jmeter.png)
+
+<br/>
+
+![jmeter-stress](./screenshots/jmeter-stress.png)
+
+<br/>
+
+![jmeter-endurance](./screenshots/jmeter-endurance.png)
