@@ -252,9 +252,6 @@ Successfull run of the pipeline:
 Successfull artifacts:
 ![artifacts](./screenshots/artifacts.png)
 
-Test results:
-![test-result](./screenshots/test-result.png)
-
 ### Postman
 ![postman](./screenshots/postman.png)
 
