@@ -288,3 +288,4 @@ Successfull artifacts:
 <br/>
 
 ![jmeter-endurance-2](./screenshots/jmeter-endurance-2.png)
+
