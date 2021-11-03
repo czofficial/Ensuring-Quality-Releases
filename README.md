@@ -282,4 +282,12 @@ Test results:
 
 <br/>
 
+![jmeter-stress-2](./screenshots/jmeter-stress-2.png)
+
+<br/>
+
 ![jmeter-endurance](./screenshots/jmeter-endurance.png)
+
+<br/>
+
+![jmeter-endurance-2](./screenshots/jmeter-endurance-2.png)
